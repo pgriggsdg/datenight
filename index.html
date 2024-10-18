@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's for Dinner?</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ff6f61;
+        }
+
+        .options {
+            margin-top: 30px;
+        }
+
+        .option {
+            display: inline-block;
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .option:hover {
+            background-color: #ff9176;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #result {
+            font-size: 2em;
+            margin-top: 50px;
+            color: #ff6f61;
+        }
+
+        @keyframes confetti {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .confetti {
+            width: 10px;
+            height: 10px;
+            background-color: #ff6f61;
+            position: absolute;
+            animation: confetti 2s linear infinite;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>What's for Dinner?</h1>
+    <p>Pick one and let's make tonight extra fun!</p>
+    
+    <div class="options">
+        <button class="option" onclick="selectOption('Steak Frites & French Onion Soup')">Steak Frites & French Onion Soup</button>
+        <button class="option" onclick="selectOption('Sushi')">Sushi</button>
+        <button class="option" onclick="selectOption('Ramen')">Ramen</button>
+    </div>
+
+    <div id="result" class="hidden"></div>
+
+    <script>
+        function selectOption(choice) {
+            // Hide options
+            document.querySelector('.options').classList.add('hidden');
+            
+            // Show result and confetti
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('result').innerHTML = `You've chosen <strong>${choice}</strong>! Dinner time is 9pm EST.`;
+
+            // Drop confetti
+            for (let i = 0; i < 100; i++) {
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = Math.random() * 100 + 'vh';
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
